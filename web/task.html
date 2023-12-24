@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang="ru-ru">
+
+<head>
+    <title>PTS2</title>
+    <meta charset="UTF-8">
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    header {
+        width: 100%;
+        box-shadow: 0 0 10px black;
+        padding: 4px;
+        margin-bottom: 10px;
+    }
+
+    main {
+        padding: 6px;
+    }
+</style>
+<script>
+    function handleSolution(data, status) {
+        console.log(data);
+        console.log(status);
+        if (status != 200) {
+            document.writeln(" Error");
+            return;
+        }
+
+        if (data == "OK") {
+            document.writeln(" Success");
+        } else if (data == "FAIL") {
+            document.writeln(" Fail");
+        } else {
+            document.writeln(" Error");
+        }
+    };
+</script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<body>
+    <header>
+        <h1>PTS2 - {task_name}</h1>
+        <h5>TID = <span style="font-weight:bold;">{task_id}</span></h5>
+    </header>
+    <main>
+        <h2>Task:</h2>
+        <p>{task_problem}</p>
+        <h2>Data input:</h2>
+        <p>{task_inputs}</p>
+        <h2>Example:</h2>
+        <div>
+            <h3>Input:</h3>
+            <p>{task_example}</p>
+            <h3>Output:</h3>
+            <p>{task_output}</p>
+        </div>
+        <div>
+            <h2>Solution:</h2>
+            <pre><textarea id="solution"></textarea></pre>
+            <button onclick='$.post("http://localhost:8001/check/0", {task_id: {task_id}, code: $("#solution").val()}, handleSolution)'>Check Solution</button>
+        </div>
+    </main>
+</body>
+
+</html>
