@@ -2,6 +2,7 @@ def fread(fp, mode="rt") -> str:
     with open(fp, mode) as f:
         return f.read()
 
+
 def compile_task(task_id, solution: str):
     code1 = fread(f"tasks/{task_id}/solution.py"). \
            replace("from pts2 import *", fread("pts2.py"))
@@ -25,6 +26,7 @@ def compile_task(task_id, solution: str):
         return outputs
     
     return lambda inputs: _test_ok(*inputs) == _test_no(*inputs)
+
 
 def run_task(task_id):
     code1 = fread(f"tasks/{task_id}/solution.py"). \
